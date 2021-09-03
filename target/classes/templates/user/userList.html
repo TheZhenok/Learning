@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>userList</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+</head>
+<body>
+<div th:insert="~{start :: Navig}"></div>
+<div class="container mt-5">
+    <h1>Список пользователей</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+        <div class="col" th:each="user : ${list}">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-header" th:text="${user.getUsername()}" style="font-weight: bold"></p>
+                    <p class="card-text" th:text="${user.getRoles()}"></p>
+                    <a th:href="@{user/{id}(id = ${user.getId()})}">edit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

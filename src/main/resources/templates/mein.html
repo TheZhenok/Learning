@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+</head>
+<body>
+<div th:insert="~{start :: Navig}"></div>
+<div class="container mt-5">
+    <form method="post" action="filter" class="row">
+        <div class="col-sm-6">
+            <input type="search" name="filter" class="form-control" placeholder="Search by name">
+        </div>
+        <div class="col">
+            <button type="submit" class="btn btn-outline-success">Search</button>
+        </div>
+    </form>
+
+    <br>
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Add new message
+    </a>
+    <div class="collapse" id="collapseExample">
+        <form method="post" action="mein" enctype="multipart/form-data">
+            <div class="card card-body mt-3">
+                <h2>Enter message:</h2>
+                <div class="form-group">
+                    <div class="form-group mt-2">
+                        <input class="form-control" type="text" name="name" placeholder="Введите имя">
+                    </div>
+                    <div class="form-group mt-2">
+                        <input class="form-control" type="text" name="message" placeholder="Сообщение">
+                    </div>
+                    <div class="custom-file mt-2">
+                        <input type="file" name="file" id="inputGroupFile01" class="form-control" data-buttonText="Choose file">
+                        <label class="custom-file-label" for="inputGroupFile01"></label>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Enter</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+        <div class="col" th:each="message : ${all}">
+            <div class="card">
+                <div th:if="${message.filename}">
+                    <img th:src="@{img/{fileName}(fileName = ${message.filename})}" class="card-img-top">
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title" th:text="${message.getName()}" style="font-weight: bold"></h4>
+                    <p class="card-text" th:text="${message.getMessage()}"></p>
+                    <p class="card-header" th:text="${message.getAuthorName()}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

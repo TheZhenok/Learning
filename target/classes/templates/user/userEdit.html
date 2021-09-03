@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Edit</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+</head>
+<body>
+<div th:insert="~{start :: Navig}"></div>
+<div class="container mt-5">
+    <form method="post" action="/user">
+      <input type="text" name="username" th:value="${user.getUsername()}">
+      <input type="hidden" name="id" th:value="${user.getId()}">
+      <div th:each="role : ${roles}">
+          <label><input type="checkbox" th:name="${role}" th:checked="${#lists.contains(user.roles, role)}" th:utext="${role}"></label>
+      </div>
+        <BR>
+    <button type="submit">Save</button>
+    </form>
+</div>
+</body>
+</html>
