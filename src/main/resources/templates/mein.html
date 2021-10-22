@@ -21,20 +21,29 @@
     </form>
 
     <br>
-    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-        Add new message
+    <a th:if="${userRole}" class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Add new book
     </a>
     <div class="collapse" id="collapseExample">
-        <form method="post" action="mein" enctype="multipart/form-data">
+        <form method="post" action="mein" enctype="multipart/form-data" th:object="${messageText}">
             <div class="card card-body mt-3">
-                <h2>Enter message:</h2>
+                <h2>Enter specifications book :</h2>
                 <div class="form-group">
+
                     <div class="form-group mt-2">
-                        <input class="form-control" type="text" name="name" placeholder="Введите имя">
+                        <input class="form-control" th:class="${nameError != null} ? 'form-control is-invalid' : 'form-control'" type="text" name="name" placeholder="Введите имя">
+                        <div class="invalid-feedback" th:if="${nameError != null}">
+                            <p th:text="${nameError}"></p>
+                        </div>
                     </div>
+
                     <div class="form-group mt-2">
-                        <input class="form-control" type="text" name="message" placeholder="Сообщение">
+                        <input class="form-control" th:class="${nameError != null} ? 'form-control is-invalid' : 'form-control'" type="text" name="message" placeholder="Сообщение">
+                        <div class="invalid-feedback" th:if="${messageError != null}">
+                            <p th:text="${messageError}"></p>
+                        </div>
                     </div>
+
                     <div class="custom-file mt-2">
                         <input type="file" name="file" id="inputGroupFile01" class="form-control" data-buttonText="Choose file">
                         <label class="custom-file-label" for="inputGroupFile01"></label>

@@ -10,7 +10,11 @@
 <div th:insert="~{start :: Navig}"></div>
 <div class="container mt-5">
     <h1>Register new user</h1>
-    <form action="reg" method="post">
+    <form action="reg" method="post" th:object="${newUser}">
+        <div th:if="${capchaError != null}" class="alert alert-danger" role="alert">
+            <p th:text="${capchaError}">
+        </div>
+        <BR>
         <div class="from-group row">
             <label class="form-label">User Name :</label>
             <div class="col-sm-6">
@@ -28,8 +32,10 @@
             <div class="col-sm-6">
                 <input class="form-control" type="email" name="email" placeholder="Email"/></div>
         </div>
+        <div class="g-recaptcha" data-sitekey="6Le68uAcAAAAAJQyiJbP7jKwI6yj87dIq7aRT9kV"></div>
         <BR>
         <button class="btn btn-primary" type="submit">Register</button>
+        <div class="g-recapcha" data-sitkey="6Le68uAcAAAAAJQyiJbP7jKwI6yj87dIq7aRT9kV"></div>
     </form>
 </div>
 </body>

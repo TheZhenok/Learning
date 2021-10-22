@@ -10,13 +10,15 @@
 <div th:insert="~{start :: Navig}"></div>
 <div class="container mt-5">
     <form method="post" action="/user">
-      <input type="text" name="username" th:value="${user.getUsername()}">
-      <input type="hidden" name="id" th:value="${user.getId()}">
-      <div th:each="role : ${roles}">
-          <label><input type="checkbox" th:name="${role}" th:checked="${#lists.contains(user.roles, role)}" th:utext="${role}"></label>
-      </div>
-        <BR>
-    <button type="submit">Save</button>
+        <div class="col-sm-6">
+            <input class="form-control" type="text" name="username" th:value="${user.getUsername()}">
+            <input type="hidden" name="id" th:value="${user.getId()}">
+            <div class="form-check mt-3" role="group" aria-label="Basic checkbox toggle button group" th:each="role : ${roles}">
+                <input class="form-check-input" id="btncheck1" autocomplete="off" type="checkbox" th:name="${role}" th:checked="${#lists.contains(user.roles, role)}">
+                <label class="form-check-label" for="btncheck1" th:text="${role}"></label>
+            </div>
+            <button class="btn btn-primary mt-2" type="submit">Save</button>
+        </div>
     </form>
 </div>
 </body>
